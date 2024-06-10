@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [
+				"$tsc-watch"
+			],
+			"label": "npm: dev",
+			"detail": "vite --open",
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

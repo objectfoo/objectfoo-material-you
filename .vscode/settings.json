@@ -1,0 +1,19 @@
+{
+	"eslint.format.enable": true,
+	"cSpell.words": [
+		"argb",
+		"clsx",
+		"hcts",
+		"objectfoo",
+		"rereactor",
+		"residualeffect",
+		"tailwindcss"
+	],
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.tabSize": 2,
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+}
