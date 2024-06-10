@@ -10,4 +10,4 @@
 * [ ] click on element to copy hex color value
 * [ ] add colors info and warning to default
 * [ ] create sample page (home?) for preview
-	** [x] add router & stub out route
+	* [x] add router & stub out route
