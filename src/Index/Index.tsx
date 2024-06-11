@@ -1,24 +1,20 @@
-import { ColorTones } from "../CommonComponents/ColorTones";
+import { InputColorStatus } from "./InputColorStatus";
 import { NavigationContext } from "../NavigationLayout";
-import { ReadOnlyTextField } from "../CommonComponents/ReadOnlyTextField";
 import { Theme as MCTTheme } from "@material/material-color-utilities";
-import { useCallback, useDeferredValue, useEffect, useMemo, useState } from "react";
+import { TonalPalettes } from "./TonalPalettes";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { useObservable } from "@residualeffect/rereactor";
-import { useOutletContext, Link as RouterLink } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import AppService from "../AppService";
 import ColorScheme from "../ColorScheme/ColorScheme";
-import ColorSwatchInput from "../CommonComponents/ColorSwatchInput";
 import ColorTools from "../ColorTools";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import PreviewIcon from "@mui/icons-material/Preview";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Tab from "@mui/material/Tab";
 import TabPanel from "../CommonComponents/TabPanel.";
 import Tabs from "@mui/material/Tabs";
 import type { PaletteMode } from "@mui/material";
-import Typography from "@mui/material/Typography";
 
 
 const CalculateTheme = (argb: number) => ColorTools.ThemeFromSourceColor(argb);
@@ -38,50 +34,6 @@ export default function Index({ service }: { service: AppService}) {
 			<ColorSchemeTabs materialToolsTheme={theme}/>
 			<TonalPalettes theme={theme} />
 		</>
-	);
-}
-
-
-function InputColorStatus(props: { service: AppService; currentArgb: number; }) {
-	const { service } = props;
-	const hex = useObservable(props.service.CurrentHex);
-	const onAccept = useCallback((newColor: string) => {service.LoadHexColor(newColor)}, [service]);
-
-	return (
-		<Stack spacing={2}>
-			<Stack spacing={1} direction="row" alignItems="center">
-				<Typography variant="h6">Input Color</Typography>
-				<Button
-					size="small"
-					component={RouterLink}
-					to={"/Preview"}
-					sx={{ borderRadius: "4px", p: 1, minWidth: "unset" }}
-					color="inherit"
-					aria-label="Preview">
-					<PreviewIcon />
-				</Button>
-			</Stack>
-			<Stack spacing={3} direction="row">
-				<ColorSwatchInput hex={hex} onAccept={onAccept} />
-				<ReadOnlyTextField label="HEX" value={hex} />
-				<ReadOnlyTextField label="ARGB" value={props.currentArgb} />
-			</Stack>
-		</Stack>
-	);
-}
-
-
-function TonalPalettes(props: {theme: MCTTheme; }) {
-	return (
-		<Stack spacing={2}>
-			<Typography gutterBottom variant="h6">Tonal Palettes</Typography>
-			<Stack spacing={3}>
-				<ColorTones label="Primary" palette={props.theme.palettes.primary} />
-				<ColorTones label="Secondary" palette={props.theme.palettes.secondary} />
-				<ColorTones label="Tertiary" palette={props.theme.palettes.tertiary} />
-				<ColorTones label="Error" palette={props.theme.palettes.error} />
-			</Stack>
-		</Stack>
 	);
 }
 
