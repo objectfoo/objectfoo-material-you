@@ -18,8 +18,3 @@
 * Enhance ColorSwatchInput with better hex picker
 * Enhance ColorSwatchInput with an HCT picker
 
-
-## Copy stuff to clipboard
-```sh
-> npm install --save-dev eslint
-```
