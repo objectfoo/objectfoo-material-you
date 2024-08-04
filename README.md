@@ -20,4 +20,6 @@
 
 
 ## Copy stuff to clipboard
-		this is some stuff
+```sh
+> npm install --save-dev eslint
+```
