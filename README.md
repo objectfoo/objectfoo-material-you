@@ -19,5 +19,5 @@
 * Enhance ColorSwatchInput with an HCT picker
 
 
-##
+## Copy stuff to clipboard
 		this is some stuff
