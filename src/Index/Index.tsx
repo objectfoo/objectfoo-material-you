@@ -30,9 +30,13 @@ export default function Index({ service }: { service: AppService }) {
 
 	return (
 		<>
-			<InputColorStatus currentArgb={currentArgb} service={service} />
-			<ColorSchemeTabs materialToolsTheme={theme}/>
-			<TonalPalettes theme={theme} />
+			{theme.source !== 0 && (
+				<>
+					<InputColorStatus currentArgb={currentArgb} service={service} />
+					<ColorSchemeTabs materialToolsTheme={theme}/>
+					<TonalPalettes theme={theme} />
+				</>
+			)}
 		</>
 	);
 }
