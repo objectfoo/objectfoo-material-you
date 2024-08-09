@@ -1,7 +1,9 @@
-import { Link as RouterLink, Outlet } from "react-router-dom";
+import { Link as RouterLink, Outlet, useLocation } from "react-router-dom";
 import { useCallback, useMemo, useState } from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Collapse from "@mui/material/Collapse";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
@@ -11,23 +13,46 @@ export function NavigationLayout() {
 	const { isRoot, pageTitle } = navContext;
 
 	return (
-		<Stack spacing={4} sx={{ pt: 5,
-			px: 3,
-			pb: 5,
-			mx: "auto",
-			bgcolor: "grey.100",
-			minWidth: "900px",
-			maxWidth: "1200px" }}>
-			<Stack spacing={1} direction="row" alignItems="center">
-				{!isRoot && (
-					<Button size="small" color="inherit" component={RouterLink} to={"/"} sx={{ borderRadius: "3px", p: 1, minWidth: "unset" }} variant="text" aria-label="Home">
-						<ArrowBackIosNewIcon fontSize="small" />
-					</Button>
-				)}
-				<Typography flexGrow={1} variant="h4" component="h1">{pageTitle}</Typography>
-			</Stack>
-			<Outlet context={navContext}/>
-		</Stack>
+		<Box id="layout-root" sx={{
+			bgcolor: "background.default",
+			minHeight: ["100vh"],
+			p: [.5, 1, 3],
+			display: "flex",
+			justifyContent: "center",
+			"& .layout-content": {
+				maxWidth: 1200 - 24,
+				minWidth: 900 - 24,
+				flexGrow: 1,
+				padding: 2,
+				bgcolor: "grey.100",
+			},
+		}}>
+			<div className="layout-content">
+				<Stack spacing={1} direction="row" alignItems="center">
+					<HomeLink isRoot={isRoot} />
+					<Typography flexGrow={1} variant="h4" component="h1">{pageTitle}</Typography>
+				</Stack>
+				<Outlet context={navContext}/>
+			</div>
+		</Box>
+	);
+}
+
+
+function HomeLink({ isRoot }: { isRoot: boolean; }): JSX.Element {
+	return (
+		<Collapse in={!isRoot} orientation="horizontal">
+			<Button
+				sx={{ borderRadius: "3px", p: 1, minWidth: 0 }}
+				size="small"
+				color="inherit"
+				component={RouterLink}
+				to={"/"}
+				variant="text"
+				aria-label="Home">
+				<ArrowBackIosNewIcon fontSize="small" />
+			</Button>
+		</Collapse>
 	);
 }
 
@@ -43,12 +68,16 @@ export interface NavigationContext extends NavigationState {
 
 
 function UseNavigationService(): NavigationContext {
-	const [navState, setNavState] = useState<NavigationState>({ isRoot: true, pageTitle: BasePageTitle });
+	const location = useLocation();
+	const [navState, setNavState] = useState<NavigationState>({ isRoot: location.pathname === "/", pageTitle: BasePageTitle });
 	const { isRoot, pageTitle } = navState;
 
 	const updateTitle = useCallback((suffix?: string) => {
 		document.title = RenderTitle(suffix ?? null, true);
-		setNavState(() => ({ isRoot: suffix === undefined, pageTitle: RenderTitle(suffix ?? null) }));
+		setNavState(() => ({
+			isRoot: suffix === undefined,
+			pageTitle: RenderTitle(suffix ?? null),
+		}));
 	}, []);
 
 	const NavContext = useMemo<NavigationContext>(() => ({
