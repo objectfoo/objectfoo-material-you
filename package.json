@@ -1,40 +1,43 @@
 {
-  "name": "objectfoo-material-you",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite --open",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@material/material-color-utilities": "^0.2.7",
-    "@mui/icons-material": "^5.15.19",
-    "@mui/material": "^5.15.19",
-    "@residualeffect/reactor": "^4.3.0",
-    "@residualeffect/rereactor": "^3.0.0",
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "clsx": "^2.1.1",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.6",
-    "react-router-dom": "^6.23.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0"
-  },
-  "volta": {
-    "node": "22.2.0"
-  }
+	"name": "objectfoo-material-you",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite --open",
+		"build": "tsc && vite build",
+		"lint": "eslint -c eslint.config.cjs --report-unused-disable-directives --max-warnings 0",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	},
+	"devDependencies": {
+		"@emotion/react": "^11.13.0",
+		"@emotion/styled": "^11.13.0",
+		"@eslint/js": "^9.8.0",
+		"@material/material-color-utilities": "^0.2.7",
+		"@mui/icons-material": "^5.16.6",
+		"@mui/material": "^5.16.6",
+		"@residualeffect/reactor": "^4.3.0",
+		"@residualeffect/rereactor": "^3.0.0",
+		"@stylistic/eslint-plugin": "^2.6.2",
+		"@types/eslint__js": "^8.42.3",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"@vitejs/plugin-react": "^4.3.1",
+		"clsx": "^2.1.1",
+		"eslint": "^9.8.0",
+		"eslint-plugin-n": "^17.10.2",
+		"eslint-plugin-react-refresh": "^0.4.9",
+		"globals": "^15.9.0",
+		"react-router-dom": "^6.26.0",
+		"typescript": "^5.5.4",
+		"typescript-eslint": "^8.0.1",
+		"vite": "^5.4.0"
+	},
+	"volta": {
+		"node": "22.2.0"
+	}
 }

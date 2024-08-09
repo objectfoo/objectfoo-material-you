@@ -7,7 +7,7 @@ interface LabelledColorProps {
 	color: ViewColor;
 	onColor?: ViewColor;
 	gridArea?: string,
-	variant?: "top"|"bottom"|"solo"|"none",
+	variant?: "top" | "bottom" | "solo" | "none",
 }
 
 const InlineColorVars = (color: number, onColor: number) => {
@@ -54,7 +54,7 @@ export function LabelledColor(props: LabelledColorProps) {
 					flex: "none",
 				},
 			})}>
-			<Typography variant={props.variant === "bottom" ? "caption" : "body1"} className="colorName">{props.color.colorName ?? "Color"}</Typography>
+			<Typography variant={props.variant === "bottom" ? "caption" : "body1"} className="colorName">{props.color.colorName}</Typography>
 			<Typography variant="caption" className="paletteId">{props.color.paletteId ?? ""}</Typography>
 		</Box>
 	);

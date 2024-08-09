@@ -15,26 +15,25 @@ interface Props {
 	onAccept: (value: string) => void;
 	hex: string;
 	argb?: number;
-	size?:"small"|"medium"|"large"
+	size?: "small" | "medium" | "large"
 }
 
-const pxForSize = (size?: "small"|"medium"|"large"): string|undefined => {
+const pxForSize = (size?: "small" | "medium" | "large"): string | undefined => {
 	const sizes = { small: "32px", medium: "48px", large: "56px" };
-	return  sizes[size!] ?? sizes.medium;
+	return size === undefined ? sizes.medium : sizes[size];
 };
 
 export default function ColorSwatchInput(props: Props) {
 	const { size, hex, argb, onAccept } = props;
 	const [open, setOpen] = useState(false);
-	const openDialog = () => { setOpen(true) };
+	const openDialog = () => { setOpen(true); };
 	const onDialogAccept = (value: string) => {
 		setOpen(false);
 		onAccept(value);
 	};
-	const onCancel = useCallback(() => { setOpen(false) }, []);
+	const onCancel = useCallback(() => { setOpen(false); }, []);
 	const dimension = pxForSize(size);
-	const color = hex !== undefined ? hex : argb !== undefined ? ColorTools.HexFromArgb(argb) : null;
-
+	const color = (argb !== undefined) ? ColorTools.HexFromArgb(argb) : hex;
 	return (
 		<Box className="swatchColorInputContainer" sx={(t) => ({
 			borderRadius: "3px",
@@ -55,7 +54,7 @@ export default function ColorSwatchInput(props: Props) {
 				padding: 0,
 				width: dimension,
 				height: dimension,
-				backgroundColor: color ?? t.palette.common.white,
+				backgroundColor: color,
 				flexGrow: 1,
 				border: "1px solid #e5e5e5",
 				borderRadius: "3px",
@@ -76,7 +75,7 @@ interface ColorPickerDialogProps {
 
 function ColorPickerDialog(props: ColorPickerDialogProps) {
 	const [hex, setHex] = useState(props.initialHex);
-	const handleClose = (_: unknown, reason: "backdropClick"|"escapeKeyDown") => {
+	const handleClose = (_: unknown, reason: "backdropClick" | "escapeKeyDown") => {
 		if (reason !== "backdropClick") {
 			props.onCancel();
 		}
@@ -109,8 +108,8 @@ function ColorPickerDialog(props: ColorPickerDialogProps) {
 						type="color"
 						value={hex}
 						style={{ height: "56px", width: "100%" }}
-						onChange={(e) => { setHex(e.target.value) }}
-						onInput={(e) => { setHex(e.currentTarget.value) }} />
+						onChange={(e) => { setHex(e.target.value); }}
+						onInput={(e) => { setHex(e.currentTarget.value); }} />
 
 				</Stack>
 			</DialogContent>

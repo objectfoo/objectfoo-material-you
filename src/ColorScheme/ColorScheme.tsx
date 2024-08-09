@@ -4,10 +4,9 @@ import { type PaletteMode } from "@mui/material";
 import { useMemo } from "react";
 import Box from "@mui/material/Box";
 import clsx from "clsx";
-import ColorTools from "../ColorTools";
+import ColorTools, { type ViewColor } from "../ColorTools";
 import SchemeColorNameMap, { SchemeColor } from "../SchemeColorNameMap";
 import type { Scheme, Theme } from "@material/material-color-utilities";
-import type { ViewColor } from "../ColorTools";
 
 
 interface SchemeEntityColorOnColor {
@@ -66,7 +65,7 @@ export default function ColorScheme(props: ColorSchemeProps) {
 				overflowX: "auto",
 			},
 			"& .schemeGrid": {
-				minWidth: 550,
+				minWidth: 750,
 				borderRadius: 2,
 				aspectRatio: "16/9",
 				m: 2,
@@ -78,21 +77,21 @@ export default function ColorScheme(props: ColorSchemeProps) {
 		})} className={clsx("scheme", `scheme-${props.mode}`)}>
 			<div className="schemeBg">
 				<div className="schemeGrid">
-					{entities.map((entity) => <SchemeEntityComponentFactory key={entity.color.colorName} entity={entity} /> )}
+					{entities.map((entity) => <SchemeEntityComponentFactory key={entity.color.colorName} entity={entity} />)}
 				</div>
 			</div>
 		</Box>
 	);
 }
 
-function SchemeEntityComponentFactory(props: { entity:  SchemeEntity }) {
+function SchemeEntityComponentFactory(props: { entity: SchemeEntity }) {
 	switch (props.entity.type) {
 		case "ColorOnColor":
 			return <ColorOnColor {...props.entity} />;
 		case "SoloColor":
-			return <LabelledColor  variant="solo"  {...props.entity} />;
+			return <LabelledColor variant="solo" {...props.entity} />;
 		default:
-			//@ts-expect-error entity.type is never
+			// @ts-expect-error entity.type is never
 			throw new Error(`Unknown type ${props.entity.type}`);
 	}
 }
