@@ -47,7 +47,7 @@ function ColorSchemeTabs({ materialToolsTheme }: { materialToolsTheme: MCTTheme;
 	const onChange = (_: unknown, newValue: PaletteMode): void => setCurrent(newValue);
 
 	return (
-		<Stack spacing={1}>
+		<Stack spacing={2} sx={{ mt: 3 }}>
 			<Tabs sx={{ borderBottom: 1, borderColor: "divider" }} value={current} onChange={onChange} aria-label="Light or Dark color scheme">
 				<Tab id="colorSchemeTab-light" aria-controls="colorSchemePanel-light" value="light" icon={<LightModeIcon />} label="Light" />
 				<Tab id="colorSchemeTab-dark" aria-controls="colorSchemePanel-dark" value="dark" icon={<DarkModeIcon />} label="Dark" />
