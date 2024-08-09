@@ -8,12 +8,11 @@ import Typography from "@mui/material/Typography";
 
 export function NavigationLayout() {
 	const navContext = UseNavigationService();
-	const { isRoot, pageTitle } = navContext; 
+	const { isRoot, pageTitle } = navContext;
 
 	return (
-		<Stack spacing={4} sx={{
-			pt: 5,
-			px:3,
+		<Stack spacing={4} sx={{ pt: 5,
+			px: 3,
 			pb: 5,
 			mx: "auto",
 			bgcolor: "grey.100",
@@ -25,7 +24,7 @@ export function NavigationLayout() {
 						<ArrowBackIosNewIcon fontSize="small" />
 					</Button>
 				)}
-				<Typography flexGrow={1}  variant="h4" component="h1">{pageTitle}</Typography>
+				<Typography flexGrow={1} variant="h4" component="h1">{pageTitle}</Typography>
 			</Stack>
 			<Outlet context={navContext}/>
 		</Stack>

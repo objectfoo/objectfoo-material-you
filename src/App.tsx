@@ -15,7 +15,7 @@ export default function App() {
 			<BrowserRouter basename="objectfoo-material-you/">
 				<Routes>
 					<Route path="/" element={<NavigationLayout />}>
-						<Route index  element={<Index service={service} />} />
+						<Route index element={<Index service={service} />} />
 						<Route path="/preview" element={<Preview service={service} />} />
 					</Route>
 					<Route path="*" element={<Navigate to="/" />} />

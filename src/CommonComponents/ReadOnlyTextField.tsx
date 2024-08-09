@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 
 
-export function ReadOnlyTextField(props: { value: string|number; label: string; }) {
+export function ReadOnlyTextField(props: { value: string | number; label: string; }) {
 	return (
 		<TextField
 			sx={{ width: 120 }}

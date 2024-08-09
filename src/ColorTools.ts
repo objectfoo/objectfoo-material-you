@@ -10,13 +10,13 @@ export default class ColorTools {
 	public static HexFromArgb(n: number) {
 		return hexFromArgb(n);
 	}
-	
+
 	// TODO: CACHE?? is this expensive?
 	public static ThemeFromSourceColor(argb: number): MaterialFoundationTheme {
 		return themeFromSourceColor(argb);
 	}
 
-	public static GetContrastTextArgb(argb: number) : number {
+	public static GetContrastTextArgb(argb: number): number {
 		const color = ColorTools.HexFromArgb(argb);
 
 		const white = getContrastRatio(color, "#FFFFFF");

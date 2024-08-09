@@ -30,7 +30,7 @@ export enum SchemeColor {
 	"scrim",
 	"inverseSurface",
 	"inverseOnSurface",
-	"inversePrimary",
+	"inversePrimary"
 }
 
 export default function(scheme: Scheme, id: SchemeColor): ViewColor {

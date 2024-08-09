@@ -1,4 +1,4 @@
-import { Observable} from "@residualeffect/reactor";
+import { Observable } from "@residualeffect/reactor";
 import ColorTools from "./ColorTools";
 
 

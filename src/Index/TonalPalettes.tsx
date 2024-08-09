@@ -1,13 +1,12 @@
-import { Theme as MCTTheme } from "@material/material-color-utilities";
+import { Theme as MCTTheme, type TonalPalette } from "@material/material-color-utilities";
 import Box from "@mui/material/Box";
 import ColorTools from "../ColorTools";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material";
 import type { SystemStyleObject } from "@mui/system";
-import type { TonalPalette } from "@material/material-color-utilities"; 
 import Typography from "@mui/material/Typography";
 
-export function TonalPalettes(props: {theme: MCTTheme; }) {
+export function TonalPalettes(props: { theme: MCTTheme; }) {
 	return (
 		<Stack spacing={2}>
 			<Typography gutterBottom variant="h6">Tonal Palettes</Typography>
@@ -22,7 +21,7 @@ export function TonalPalettes(props: {theme: MCTTheme; }) {
 }
 
 
-const DisplayTones = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 95, 98, 99, 100 ];
+const DisplayTones = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 95, 98, 99, 100];
 
 function ColorTones(props: { sx?: SxProps<Theme>; palette: TonalPalette; label: string; }) {
 	return (

@@ -19,14 +19,14 @@ import type { PaletteMode } from "@mui/material";
 
 const CalculateTheme = (argb: number) => ColorTools.ThemeFromSourceColor(argb);
 
-export default function Index({ service }: { service: AppService}) {
+export default function Index({ service }: { service: AppService }) {
 	const ctx = useOutletContext<NavigationContext>();
 	const currentArgb = useObservable(service.CurrentArgb);
 	const currentArgbDeferred = useDeferredValue(currentArgb);
-	const theme =  useMemo(() => CalculateTheme(currentArgbDeferred), [currentArgbDeferred]);
+	const theme = useMemo(() => CalculateTheme(currentArgbDeferred), [currentArgbDeferred]);
 
-	useEffect(() => ctx.updateTitle(),[ctx]);
-	useEffect(() => { service.LoadHexColor("#3557FF") }, [service]);
+	useEffect(() => ctx.updateTitle(), [ctx]);
+	useEffect(() => { service.LoadHexColor("#3557FF"); }, [service]);
 
 	return (
 		<>
@@ -52,7 +52,7 @@ function ColorSchemeTabs({ materialToolsTheme }: { materialToolsTheme: MCTTheme;
 				{(current === "light") && <ColorScheme mode="light" theme={materialToolsTheme} />}
 			</TabPanel>
 			<TabPanel identifier="colorSchemePanel" current={current} value="dark" aria-labelledby="colorSchemeTab-dark">
-				{(current === "dark") && <ColorScheme mode="dark"  theme={materialToolsTheme} />}
+				{(current === "dark") && <ColorScheme mode="dark" theme={materialToolsTheme} />}
 			</TabPanel>
 		</Stack>
 	);

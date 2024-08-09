@@ -6,7 +6,7 @@ import AppService from "../AppService";
 
 export default function Preview(_: { service: AppService }) {
 	const ctx = useOutletContext<NavigationContext>();
-	useEffect(() => ctx.updateTitle("Preview"),[ctx]);
+	useEffect(() => ctx.updateTitle("Preview"), [ctx]);
 
 	return (
 		<>

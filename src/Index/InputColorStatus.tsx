@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 export function InputColorStatus(props: { service: AppService; currentArgb: number; }) {
 	const { service } = props;
 	const hex = useObservable(props.service.CurrentHex);
-	const onAccept = useCallback((newColor: string) => {service.LoadHexColor(newColor)}, [service]);
+	const onAccept = useCallback((newColor: string) => { service.LoadHexColor(newColor); }, [service]);
 
 	return (
 		<Stack direction="row" spacing={2}>
