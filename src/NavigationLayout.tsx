@@ -14,21 +14,18 @@ export function NavigationLayout() {
 
 	return (
 		<Box id="layout-root" sx={{
-			bgcolor: "background.default",
-			minHeight: ["100vh"],
-			p: [.5, 1, 3],
+			// m: [.5, 1, 3],
 			display: "flex",
 			justifyContent: "center",
 			"& .layout-content": {
-				maxWidth: 1200 - 24,
-				minWidth: 900 - 24,
+				maxWidth: 1200,
 				flexGrow: 1,
-				padding: 2,
-				bgcolor: "grey.100",
+				px: 3,
+				py: 2,
 			},
 		}}>
 			<div className="layout-content">
-				<Stack spacing={1} direction="row" alignItems="center">
+				<Stack direction="row" alignItems="center">
 					<HomeLink isRoot={isRoot} />
 					<Typography flexGrow={1} variant="h4" component="h1">{pageTitle}</Typography>
 				</Stack>
@@ -43,7 +40,7 @@ function HomeLink({ isRoot }: { isRoot: boolean; }): JSX.Element {
 	return (
 		<Collapse in={!isRoot} orientation="horizontal">
 			<Button
-				sx={{ borderRadius: "3px", p: 1, minWidth: 0 }}
+				sx={{ borderRadius: "3px", p: 1, minWidth: 0, mr: 1 }}
 				size="small"
 				color="inherit"
 				component={RouterLink}

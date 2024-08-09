@@ -11,7 +11,7 @@ export default function App() {
 	const [service] = useState(() => new AppService());
 
 	return (
-		<ScopedCssBaseline>
+		<ScopedCssBaseline sx={{ bgcolor: "grey.100", minHeight: "100vh", overflow: "auto" }}>
 			<BrowserRouter basename="objectfoo-material-you/">
 				<Routes>
 					<Route path="/" element={<NavigationLayout />}>

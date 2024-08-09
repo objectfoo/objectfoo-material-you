@@ -1,5 +1,4 @@
 import { NavigationContext } from "../NavigationLayout";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
@@ -12,7 +11,7 @@ export default function Preview(_: { service: AppService }) {
 	return (
 		<>
 			<Typography>Preview</Typography>
-			<Box sx={{ minHeight: 1500 }}></Box>
+			{/* <Box sx={{ minHeight: 1500 }}></Box> */}
 		</>
 	);
 }

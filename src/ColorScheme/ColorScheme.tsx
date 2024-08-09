@@ -65,7 +65,7 @@ export default function ColorScheme(props: ColorSchemeProps) {
 				overflowX: "auto",
 			},
 			"& .schemeGrid": {
-				minWidth: 550,
+				minWidth: 750,
 				borderRadius: 2,
 				aspectRatio: "16/9",
 				m: 2,
