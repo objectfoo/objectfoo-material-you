@@ -1,5 +1,6 @@
 import { getContrastRatio } from "@mui/system";
 import { Theme as MaterialFoundationTheme, argbFromHex, hexFromArgb, themeFromSourceColor } from "@material/material-color-utilities";
+import { SchemeColor } from "./ColorScheme/SchemeColorNameMap";
 
 
 export default class ColorTools {
@@ -32,11 +33,28 @@ export default class ColorTools {
 		return white > black ? "#FFFFFF" : "#000000";
 	}
 
+
 	public static InlineColorVars(color: number, onColor: number): React.CSSProperties {
 		return {
 			"--mu-main-color": ColorTools.HexFromArgb(color),
 			"--mu-alternate-color": ColorTools.HexFromArgb(onColor),
 		} as React.CSSProperties;
+	}
+
+	// take a string #AABBCC or #ABC and return AABBCC
+	public static HexForUrl(x: string, fallback: string): string {
+		const color = x.replace(/#/g, "");
+
+		// TODO: regex for hex chars and other validation
+		return color.length === 6
+			? color
+			: color.length === 3
+				? [
+					color[0].repeat(2),
+					color[1].repeat(2),
+					color[2].repeat(2),
+				].join()
+				: fallback;
 	}
 
 	public static WHITE = ColorTools.ArgbFromHex("#FFFFFF");
@@ -46,5 +64,5 @@ export default class ColorTools {
 export interface ViewColor {
 	color: number;
 	colorName: string;
-	paletteId?: string;
+	paletteId?: SchemeColor;
 }
