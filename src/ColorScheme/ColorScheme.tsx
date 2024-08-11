@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import Box from "@mui/material/Box";
 import clsx from "clsx";
 import ColorTools, { type ViewColor } from "../ColorTools";
-import SchemeColorNameMap, { SchemeColor } from "../SchemeColorNameMap";
+import CreateViewColor, { SchemeColor } from "./SchemeColorNameMap";
 import type { Scheme, Theme } from "@material/material-color-utilities";
 
 
@@ -26,25 +26,25 @@ type SchemeEntity = SchemeEntityColorOnColor | SchemeEntitySolo;
 
 const CreateColorEntities = (scheme: Scheme): SchemeEntity[] => {
 	return [
-		{ color: SchemeColorNameMap(scheme, SchemeColor.primary), onColor: SchemeColorNameMap(scheme, SchemeColor.onPrimary), gridArea: "1/1/span 3/span 2", type: "ColorOnColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.primaryContainer), onColor: SchemeColorNameMap(scheme, SchemeColor.onPrimaryContainer), gridArea: "4/1/span 3/span 2", type: "ColorOnColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.secondary), onColor: SchemeColorNameMap(scheme, SchemeColor.onSecondary), gridArea: "1/3/span 3/span 2", type: "ColorOnColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.secondaryContainer), onColor: SchemeColorNameMap(scheme, SchemeColor.onSecondaryContainer), gridArea: "4/3/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.primary), onColor: CreateViewColor(scheme, SchemeColor.onPrimary), gridArea: "1/1/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.primaryContainer), onColor: CreateViewColor(scheme, SchemeColor.onPrimaryContainer), gridArea: "4/1/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.secondary), onColor: CreateViewColor(scheme, SchemeColor.onSecondary), gridArea: "1/3/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.secondaryContainer), onColor: CreateViewColor(scheme, SchemeColor.onSecondaryContainer), gridArea: "4/3/span 3/span 2", type: "ColorOnColor" },
 
-		{ color: SchemeColorNameMap(scheme, SchemeColor.tertiary), onColor: SchemeColorNameMap(scheme, SchemeColor.onTertiary), gridArea: "1/5/span 3/span 2", type: "ColorOnColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.tertiaryContainer), onColor: SchemeColorNameMap(scheme, SchemeColor.onTertiaryContainer), gridArea: "4/5/span 3/span 2", type: "ColorOnColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.error), onColor: SchemeColorNameMap(scheme, SchemeColor.onError), gridArea: "1/7/span 3/span 2", type: "ColorOnColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.errorContainer), onColor: SchemeColorNameMap(scheme, SchemeColor.onErrorContainer), gridArea: "4/7/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.tertiary), onColor: CreateViewColor(scheme, SchemeColor.onTertiary), gridArea: "1/5/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.tertiaryContainer), onColor: CreateViewColor(scheme, SchemeColor.onTertiaryContainer), gridArea: "4/5/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.error), onColor: CreateViewColor(scheme, SchemeColor.onError), gridArea: "1/7/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.errorContainer), onColor: CreateViewColor(scheme, SchemeColor.onErrorContainer), gridArea: "4/7/span 3/span 2", type: "ColorOnColor" },
 
-		{ color: SchemeColorNameMap(scheme, SchemeColor.surface), onColor: SchemeColorNameMap(scheme, SchemeColor.onSurface), gridArea: "7/1/span 3/span 2", type: "ColorOnColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.surfaceVariant), onColor: SchemeColorNameMap(scheme, SchemeColor.onSurfaceVariant), gridArea: "7/3/span 3/span 2", type: "ColorOnColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.inverseSurface), onColor: SchemeColorNameMap(scheme, SchemeColor.inverseOnSurface), gridArea: "7/5/span 3/span 2", type: "ColorOnColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.inversePrimary), gridArea: "7/7/span 2/span 2", type: "SoloColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.surface), onColor: CreateViewColor(scheme, SchemeColor.onSurface), gridArea: "7/1/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.surfaceVariant), onColor: CreateViewColor(scheme, SchemeColor.onSurfaceVariant), gridArea: "7/3/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.inverseSurface), onColor: CreateViewColor(scheme, SchemeColor.inverseOnSurface), gridArea: "7/5/span 3/span 2", type: "ColorOnColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.inversePrimary), gridArea: "7/7/span 2/span 2", type: "SoloColor" },
 
-		{ color: SchemeColorNameMap(scheme, SchemeColor.outline), gridArea: "10/1/span 1/span 2", type: "SoloColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.outlineVariant), gridArea: "10/3/span 1/span 2", type: "SoloColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.scrim), gridArea: "10/5/span 1/span 2", type: "SoloColor" },
-		{ color: SchemeColorNameMap(scheme, SchemeColor.shadow), gridArea: "10/7/span 1/span 2", type: "SoloColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.outline), gridArea: "10/1/span 1/span 2", type: "SoloColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.outlineVariant), gridArea: "10/3/span 1/span 2", type: "SoloColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.scrim), gridArea: "10/5/span 1/span 2", type: "SoloColor" },
+		{ color: CreateViewColor(scheme, SchemeColor.shadow), gridArea: "10/7/span 1/span 2", type: "SoloColor" },
 	];
 };
 

@@ -1,11 +1,8 @@
 import { InputColorStatus } from "./InputColorStatus";
-import { NavigationContext } from "../NavigationLayout";
 import { Theme as MCTTheme } from "@material/material-color-utilities";
 import { TonalPalettes } from "./TonalPalettes";
-import { useDeferredValue, useEffect, useMemo, useState } from "react";
-import { useObservable } from "@residualeffect/rereactor";
-import { useOutletContext } from "react-router-dom";
-import AppService from "../AppService";
+import { createContext, useCallback, useContext, useDeferredValue, useMemo, useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import ColorScheme from "../ColorScheme/ColorScheme";
 import ColorTools from "../ColorTools";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -15,34 +12,59 @@ import Tab from "@mui/material/Tab";
 import TabPanel from "../CommonComponents/TabPanel.";
 import Tabs from "@mui/material/Tabs";
 import type { PaletteMode } from "@mui/material";
+import Box from "@mui/material/Box";
 
 
-const CalculateTheme = (argb: number) => ColorTools.ThemeFromSourceColor(argb);
+export interface TReactIndex {
+	color: ColorState;
+	theme: MCTTheme;
+	updateHex: (newHex: string) => void;
+}
 
-export default function Index({ service }: { service: AppService }) {
-	const ctx = useOutletContext<NavigationContext>();
-	const currentArgb = useObservable(service.CurrentArgb);
-	const currentArgbDeferred = useDeferredValue(currentArgb);
-	const theme = useMemo(() => CalculateTheme(currentArgbDeferred), [currentArgbDeferred]);
+export const IndexContext = createContext<TReactIndex>({} as TReactIndex);
 
-	useEffect(() => ctx.updateTitle(), [ctx]);
-	useEffect(() => { service.LoadHexColor("#3557FF"); }, [service]);
+export interface ColorState {
+	hex: string;
+	argb: number;
+}
 
+export default function Index(): JSX.Element {
+	const ctx = useIndex();
 	return (
-		<>
-			{theme.source !== 0 && (
-				<>
-					<InputColorStatus currentArgb={currentArgb} service={service} />
-					<ColorSchemeTabs materialToolsTheme={theme}/>
-					<TonalPalettes theme={theme} />
-				</>
-			)}
-		</>
+		<IndexContext.Provider value={ctx}>
+			<Box sx={{}}>
+				<InputColorStatus />
+				<ColorSchemeTabs />
+				<TonalPalettes />
+			</Box>
+		</IndexContext.Provider>
 	);
 }
 
 
-function ColorSchemeTabs({ materialToolsTheme }: { materialToolsTheme: MCTTheme; }) {
+function useIndex(): { color: ColorState; theme: MCTTheme; updateHex: (newHex: string) => void; } {
+	const { argb, hex } = useLoaderData() as Awaited<IndexViewData>;
+	const [color, setColor] = useState<ColorState>({ hex, argb });
+	const lazyArgb = useDeferredValue(color.argb);
+
+	const theme = useMemo(
+		() => ColorTools.ThemeFromSourceColor(lazyArgb > 0 ? lazyArgb : argb),
+		[lazyArgb, argb]
+	);
+
+	const updateHex = useCallback(
+		(newHex: string) => { setColor((state) => ({ ...state, hex: newHex, argb: ColorTools.ArgbFromHex(newHex) })); },
+		[setColor]
+	);
+
+	return useMemo(
+		() => ({ color, theme, updateHex }),
+		[color, theme, updateHex]
+	);
+}
+
+function ColorSchemeTabs() {
+	const { theme } = useContext(IndexContext);
 	const [current, setCurrent] = useState<PaletteMode>("light");
 	const onChange = (_: unknown, newValue: PaletteMode): void => setCurrent(newValue);
 
@@ -53,11 +75,39 @@ function ColorSchemeTabs({ materialToolsTheme }: { materialToolsTheme: MCTTheme;
 				<Tab id="colorSchemeTab-dark" aria-controls="colorSchemePanel-dark" value="dark" icon={<DarkModeIcon />} label="Dark" />
 			</Tabs>
 			<TabPanel identifier="colorSchemePanel" aria-labelledby="colorSchemeTab-light" current={current} value="light">
-				{(current === "light") && <ColorScheme mode="light" theme={materialToolsTheme} />}
+				{(current === "light") && <ColorScheme mode="light" theme={theme} />}
 			</TabPanel>
 			<TabPanel identifier="colorSchemePanel" current={current} value="dark" aria-labelledby="colorSchemeTab-dark">
-				{(current === "dark") && <ColorScheme mode="dark" theme={materialToolsTheme} />}
+				{(current === "dark") && <ColorScheme mode="dark" theme={theme} />}
 			</TabPanel>
 		</Stack>
 	);
 }
+
+const defaultColor = "#3557FF";
+
+async function TransformInitialData(hexColor: string): Promise<{ hex: string; argb: number; }> {
+	return {
+		hex: hexColor,
+		argb: ColorTools.ArgbFromHex(hexColor),
+	};
+};
+
+async function FetchInitialColor() {
+	await new Promise((r) => setTimeout(r, 300));
+	return defaultColor;
+}
+
+type IndexViewData = ReturnType<typeof TransformInitialData>;
+
+export async function FetchIndex(): Promise<IndexViewData> {
+	let initialHex;
+	try {
+		initialHex = await FetchInitialColor();
+	} catch {
+		initialHex = defaultColor;
+	}
+
+	return await TransformInitialData(initialHex);
+}
+

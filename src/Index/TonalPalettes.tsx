@@ -1,20 +1,24 @@
-import { Theme as MCTTheme, type TonalPalette } from "@material/material-color-utilities";
+import { type TonalPalette } from "@material/material-color-utilities";
 import Box from "@mui/material/Box";
 import ColorTools from "../ColorTools";
 import Stack from "@mui/material/Stack";
 import type { SxProps, Theme } from "@mui/material";
 import type { SystemStyleObject } from "@mui/system";
 import Typography from "@mui/material/Typography";
+import { useContext } from "react";
+import { IndexContext } from "./Index";
 
-export function TonalPalettes(props: { theme: MCTTheme; }) {
+
+export function TonalPalettes() {
+	const { theme } = useContext(IndexContext);
 	return (
 		<Stack spacing={2}>
 			<Typography gutterBottom variant="h6">Tonal Palettes</Typography>
 			<Stack spacing={3}>
-				<ColorTones label="Primary" palette={props.theme.palettes.primary} />
-				<ColorTones label="Secondary" palette={props.theme.palettes.secondary} />
-				<ColorTones label="Tertiary" palette={props.theme.palettes.tertiary} />
-				<ColorTones label="Error" palette={props.theme.palettes.error} />
+				<ColorTones label="Primary" palette={theme.palettes.primary} />
+				<ColorTones label="Secondary" palette={theme.palettes.secondary} />
+				<ColorTones label="Tertiary" palette={theme.palettes.tertiary} />
+				<ColorTones label="Error" palette={theme.palettes.error} />
 			</Stack>
 		</Stack>
 	);
