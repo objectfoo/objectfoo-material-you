@@ -4,7 +4,7 @@ import Index, { FetchIndex } from "../Index/Index";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { AppError } from "./AppError";
 import { Preview } from "../Preview/Preview";
-import { Example } from "../Preview/Example";
+import { ExampleFactory } from "../Preview/ExampleFactory";
 
 const router = createBrowserRouter([
 	{
@@ -17,12 +17,12 @@ const router = createBrowserRouter([
 				loader: FetchIndex,
 			},
 			{
-				path: "example/:hex",
+				path: "/:hex?/example",
 				element: <Preview />,
 				children: [
 					{
 						index: true,
-						element: <Example />,
+						element: <ExampleFactory />,
 					},
 				],
 			},

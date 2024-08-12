@@ -22,7 +22,7 @@ export function InputColorStatus() {
 					<Button
 						size="small"
 						component={RouterLink}
-						to={`/example/${hex}`}
+						to={`/${hex}/example`}
 						sx={{ borderRadius: "4px", p: 1, minWidth: "unset" }}
 						color="inherit"
 						aria-label="Preview">

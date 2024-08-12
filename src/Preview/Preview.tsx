@@ -1,6 +1,6 @@
-import Box from "@mui/material/Box";
 import { useMemo, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
+import { PreviewThemeProvider } from "./PreviewThemeProvider";
 
 export interface PreviewOutletContext {
 	color: string | null;
@@ -8,7 +8,7 @@ export interface PreviewOutletContext {
 }
 
 type PreviewParams = {
-	hex?: null | string;
+	hex?: string;
 };
 
 export function Preview() {
@@ -17,8 +17,8 @@ export function Preview() {
 	const ctx = useMemo(() => ({ color, setColor }), [color, setColor]);
 
 	return (
-		<Box>
+		<PreviewThemeProvider color={color}>
 			<Outlet context={ctx} />
-		</Box>
+		</PreviewThemeProvider>
 	);
 }
