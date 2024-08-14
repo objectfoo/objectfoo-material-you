@@ -6,13 +6,11 @@ import ColorSwatchInput from "../CommonComponents/ColorSwatchInput";
 import PreviewIcon from "@mui/icons-material/Preview";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import ColorTools from "../ColorTools";
 import { IndexContext } from "./Index";
 
 export function InputColorStatus() {
 	const { color, updateHex } = useContext(IndexContext);
 	const onAccept = useCallback((newColor: string) => { updateHex(newColor); }, [updateHex]);
-	const hex = ColorTools.HexForUrl(color.hex, "#ccc");
 
 	return (
 		<Stack direction="row" spacing={2}>
@@ -22,7 +20,7 @@ export function InputColorStatus() {
 					<Button
 						size="small"
 						component={RouterLink}
-						to={`/${hex}/example`}
+						to="/example"
 						sx={{ borderRadius: "4px", p: 1, minWidth: "unset" }}
 						color="inherit"
 						aria-label="Preview">
