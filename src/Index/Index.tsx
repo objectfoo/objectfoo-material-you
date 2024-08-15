@@ -86,19 +86,27 @@ function ColorSchemeTabs() {
 
 const defaultColor = "#3557FF";
 
-async function TransformInitialData(hexColor: string): Promise<{ hex: string; argb: number; }> {
+/**
+ * simulate fetching and data from server
+ */
+
+interface IndexViewData {
+	hex: string;
+	argb: number;
+};
+
+async function FetchInitialColor() {
+	await new Promise((r) => setTimeout(r, 100));
+	return defaultColor;
+}
+
+async function TransformInitialData(hexColor: string): Promise<IndexViewData> {
+	await new Promise((r) => setTimeout(r, 20));
 	return {
 		hex: hexColor,
 		argb: ColorTools.ArgbFromHex(hexColor),
 	};
 };
-
-async function FetchInitialColor() {
-	await new Promise((r) => setTimeout(r, 300));
-	return defaultColor;
-}
-
-type IndexViewData = ReturnType<typeof TransformInitialData>;
 
 export async function FetchIndex(): Promise<IndexViewData> {
 	let initialHex;
@@ -110,4 +118,3 @@ export async function FetchIndex(): Promise<IndexViewData> {
 
 	return await TransformInitialData(initialHex);
 }
-

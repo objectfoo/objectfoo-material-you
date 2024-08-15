@@ -1,6 +1,7 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { PreviewThemeProvider } from "./PreviewThemeProvider";
+import { SchemeContext } from "../App/App";
 
 export interface PreviewOutletContext {
 	color: string | null;
@@ -12,7 +13,8 @@ type PreviewParams = {
 };
 
 export function Preview() {
-	const { hex } = useParams() satisfies PreviewParams;
+	const x = useContext(SchemeContext);
+	console.log(x);
 	const [color, setColor] = useState(hex);
 	const ctx = useMemo(() => ({ color, setColor }), [color, setColor]);
 
