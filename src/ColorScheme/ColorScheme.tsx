@@ -62,10 +62,9 @@ export default function ColorScheme(props: ColorSchemeProps) {
 				borderRadius: "4px",
 				border: `1px solid ${t.palette.divider}`,
 				bgcolor: bgColor,
-				overflowX: "auto",
+				overflow: "hidden",
 			},
 			"& .schemeGrid": {
-				minWidth: 750,
 				borderRadius: 2,
 				aspectRatio: "16/9",
 				m: 2,

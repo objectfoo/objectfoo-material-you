@@ -3,5 +3,8 @@
 ## TODO
 
 * [x] convert to data router
-* [ ] fill out example route
-* [ ] add more examples
+* [ ] make scheme more responsive
+* [ ] fix width of scheme display
+* [ ] finish example route
+* [ ] add an example that uses the current color
+

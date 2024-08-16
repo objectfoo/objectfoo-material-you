@@ -1,18 +1,18 @@
-import { InputColorStatus } from "./InputColorStatus";
+import { InputColorStatus } from "../Shared/InputColorStatus";
 import { Theme as MCTTheme } from "@material/material-color-utilities";
-import { TonalPalettes } from "./TonalPalettes";
 import { createContext, useCallback, useContext, useDeferredValue, useMemo, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import ColorScheme from "../ColorScheme/ColorScheme";
 import ColorTools from "../ColorTools";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import Stack from "@mui/material/Stack";
 import Tab from "@mui/material/Tab";
-import TabPanel from "./TabPanel.";
+import TabPanel from "../Shared/TabPanel";
 import Tabs from "@mui/material/Tabs";
-import type { PaletteMode } from "@mui/material";
-import Box from "@mui/material/Box";
+import type { PaletteMode, Theme } from "@mui/material";
+import type { IndexViewData } from "./FetchIndex";
 
 
 export interface TReactIndex {
@@ -28,21 +28,7 @@ export interface ColorState {
 	argb: number;
 }
 
-export default function Index(): JSX.Element {
-	const ctx = useIndex();
-	return (
-		<IndexContext.Provider value={ctx}>
-			<Box sx={{}}>
-				<InputColorStatus />
-				<ColorSchemeTabs />
-				<TonalPalettes />
-			</Box>
-		</IndexContext.Provider>
-	);
-}
-
-
-function useIndex(): { color: ColorState; theme: MCTTheme; updateHex: (newHex: string) => void; } {
+export default function Root(): JSX.Element {
 	const { argb, hex } = useLoaderData() as Awaited<IndexViewData>;
 	const [color, setColor] = useState<ColorState>({ hex, argb });
 	const lazyArgb = useDeferredValue(color.argb);
@@ -57,13 +43,45 @@ function useIndex(): { color: ColorState; theme: MCTTheme; updateHex: (newHex: s
 		[setColor]
 	);
 
-	return useMemo(
+	const ctx = useMemo(
 		() => ({ color, theme, updateHex }),
 		[color, theme, updateHex]
 	);
+
+	return (
+		<IndexContext.Provider value={ctx}>
+			<ScopedCssBaseline sx={RootStyles}>
+				<div className="viewRoot">
+					<InputColorStatus />
+					<Outlet />
+				</div>
+			</ScopedCssBaseline>
+		</IndexContext.Provider>
+	);
 }
 
-function ColorSchemeTabs() {
+const RootStyles = (theme: Theme) => {
+	return {
+		bgcolor: "grey.100",
+		display: "flow-root",
+		minHeight: "100vh",
+		px: 2,
+		[theme.breakpoints.down(975)]: { px: 0 },
+		"& .viewRoot": {
+			maxWidth: 1200,
+			minWidth: 950 - 48 - 2, // 48 padding 2 border width
+			bgcolor: "background.paper",
+			borderRadius: 1,
+			mx: "auto",
+			my: 2,
+			p: 3,
+			[theme.breakpoints.down(975)]: { my: 0 },
+		},
+	};
+};
+
+
+export function ColorSchemeTabs() {
 	const { theme } = useContext(IndexContext);
 	const [current, setCurrent] = useState<PaletteMode>("light");
 	const onChange = (_: unknown, newValue: PaletteMode): void => setCurrent(newValue);
@@ -83,31 +101,3 @@ function ColorSchemeTabs() {
 		</Stack>
 	);
 }
-
-const defaultColor = "#3557FF";
-
-async function TransformInitialData(hexColor: string): Promise<{ hex: string; argb: number; }> {
-	return {
-		hex: hexColor,
-		argb: ColorTools.ArgbFromHex(hexColor),
-	};
-};
-
-async function FetchInitialColor() {
-	await new Promise((r) => setTimeout(r, 300));
-	return defaultColor;
-}
-
-type IndexViewData = ReturnType<typeof TransformInitialData>;
-
-export async function FetchIndex(): Promise<IndexViewData> {
-	let initialHex;
-	try {
-		initialHex = await FetchInitialColor();
-	} catch {
-		initialHex = defaultColor;
-	}
-
-	return await TransformInitialData(initialHex);
-}
-

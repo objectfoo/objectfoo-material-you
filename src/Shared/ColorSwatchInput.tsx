@@ -97,7 +97,6 @@ function ColorPickerDialog(props: ColorPickerDialogProps) {
 							<ReadOnlyTextField label="HEX" value={hex} />
 							<ReadOnlyTextField label="ARGB" value={ColorTools.ArgbFromHex(hex)} />
 						</Stack>
-
 						<Stack spacing={1} direction="row">
 							<ReadOnlyTextField label="Contrast w/Black" value={`${contrast(hex, "#000000")}:1`} />
 							<ReadOnlyTextField label="Contrast w/White" value={`${contrast(hex, "#FFFFFF")}:1`} />

@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useContext } from "react";
-import { IndexContext } from "./Index";
+import { IndexContext } from "../Index/Root";
 import { ColorTones } from "./ColorTones";
 
 
