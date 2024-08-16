@@ -1,8 +1,8 @@
 import { Link as RouterLink } from "react-router-dom";
-import { ReadOnlyTextField } from "../CommonComponents/ReadOnlyTextField";
+import { ReadOnlyTextField } from "./ReadOnlyTextField";
 import { useCallback, useContext } from "react";
 import Button from "@mui/material/Button";
-import ColorSwatchInput from "../CommonComponents/ColorSwatchInput";
+import ColorSwatchInput from "./ColorSwatchInput";
 import PreviewIcon from "@mui/icons-material/Preview";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";

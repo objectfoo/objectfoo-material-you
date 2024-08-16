@@ -9,7 +9,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import Stack from "@mui/material/Stack";
 import Tab from "@mui/material/Tab";
-import TabPanel from "../CommonComponents/TabPanel.";
+import TabPanel from "./TabPanel.";
 import Tabs from "@mui/material/Tabs";
 import type { PaletteMode } from "@mui/material";
 import Box from "@mui/material/Box";
