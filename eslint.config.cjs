@@ -4,8 +4,8 @@ const eslintNode = require("eslint-plugin-n");
 const globals = require("globals");
 const path = require("path");
 const stylistic = require("@stylistic/eslint-plugin");
-const tseslint = require("typescript-eslint");
-
+const tsEslint = require("typescript-eslint");
+const reactRefresh = require("eslint-plugin-react-refresh");
 
 /**
  * @typedef {(import("eslint").Linter.Config & { name?: string; })} FlatConfigWithName
@@ -131,11 +131,20 @@ const CommonCodeConfigs = [
  * @type {import("typescript-eslint").Config}
  */
 const BrowserConfigs = [
-	...tseslint.config({
+	{
+		// in main config for TSX/JSX source files
+		plugins: {
+			"react-refresh": reactRefresh,
+		},
+		rules: {
+			"react-refresh/only-export-components": "warn",
+		},
+	},
+	...tsEslint.config({
 		files: FileGlobs.browser,
 		name: "whs-custom:browser",
 		extends: [
-			...tseslint.configs.recommended,
+			...tsEslint.configs.recommended,
 
 			// TODO: re-enable when eslint 9 compat
 			/* jsxA11y.flatConfigs.recommended, */

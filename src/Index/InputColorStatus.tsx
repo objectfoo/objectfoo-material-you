@@ -1,17 +1,32 @@
-import { getContrastRatio } from "@mui/material/styles";
-import { ReadOnlyTextField } from "./ReadOnlyTextField";
-import { useState, useCallback, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ColorTools from "../ColorTools";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { ColorState, IndexContext } from "./IndexRoot";
+import ColorTools from "../ColorTools";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, getContrastRatio } from "@mui/material";
+import { ReadOnlyTextField } from "../Shared/ReadOnlyTextField";
+
+export function InputColorStatus() {
+	const { color, updateHex } = useContext(IndexContext);
+	const onAccept = useCallback((newColor: string) => { updateHex(newColor); }, [updateHex]);
+
+	return (
+		<Stack className="color-detail" spacing={2} useFlexGap>
+			<Stack spacing={1} direction="row" alignItems="center" useFlexGap>
+				<Typography fontWeight="normal" variant="h6">Seed Color</Typography>
+			</Stack>
+
+			<Stack spacing={2} direction="row" alignItems="center">
+				<ColorSwatchInput hex={color.hex} onAccept={onAccept} />
+				<InputColorValues color={color} />
+			</Stack>
+		</Stack>
+	);
+}
 
 
-interface Props {
+interface ColorSwatchInputProps {
 	onAccept: (value: string) => void;
 	hex: string;
 	argb?: number;
@@ -23,7 +38,7 @@ const pxForSize = (size?: "small" | "medium" | "large"): string | undefined => {
 	return size === undefined ? sizes.medium : sizes[size];
 };
 
-export default function ColorSwatchInput(props: Props) {
+export default function ColorSwatchInput(props: ColorSwatchInputProps) {
 	const { size, hex, argb, onAccept } = props;
 	const [open, setOpen] = useState(false);
 	const openDialog = () => { setOpen(true); };
@@ -93,11 +108,11 @@ function ColorPickerDialog(props: ColorPickerDialogProps) {
 			<DialogContent>
 				<Stack spacing={1} direction="row">
 					<Stack spacing={1}>
-						<Stack spacing={1} direction="row">
+						<Stack spacing={1} direction="row" sx={{ pt: 1 }}>
 							<ReadOnlyTextField label="HEX" value={hex} />
 							<ReadOnlyTextField label="ARGB" value={ColorTools.ArgbFromHex(hex)} />
 						</Stack>
-						<Stack spacing={1} direction="row">
+						<Stack spacing={1} direction="row" sx={{ pt: 1 }}>
 							<ReadOnlyTextField label="Contrast w/Black" value={`${contrast(hex, "#000000")}:1`} />
 							<ReadOnlyTextField label="Contrast w/White" value={`${contrast(hex, "#FFFFFF")}:1`} />
 						</Stack>
@@ -126,4 +141,26 @@ function contrast(foreground: string, background: string) {
 		return parseFloat(raw.toFixed(2));
 	}
 	return 0;
+}
+
+
+const Caption = ({ children, alignRight }: { children: React.ReactNode; alignRight?: boolean; }): JSX.Element => (
+	<Typography variant="caption" textAlign={alignRight === true ? "right" : undefined}>{children}</Typography>
+);
+
+function InputColorValues({ color }: { color: ColorState }): JSX.Element {
+	return (
+		<>
+			<Stack direction="row" gap={1}>
+				<Stack direction="column">
+					<Caption>HEX</Caption>
+					<Caption>ARGB</Caption>
+				</Stack>
+				<Stack direction="column">
+					<Caption alignRight>{color.hex}</Caption>
+					<Caption alignRight>{color.argb}</Caption>
+				</Stack>
+			</Stack>
+		</>
+	);
 }

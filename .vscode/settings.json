@@ -1,6 +1,7 @@
 {
 	"eslint.format.enable": true,
 	"cSpell.words": [
+		"AABBCC",
 		"argb",
 		"clsx",
 		"hcts",

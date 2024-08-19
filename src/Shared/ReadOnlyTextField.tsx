@@ -6,8 +6,8 @@ export function ReadOnlyTextField(props: { value: string | number; label: string
 		<TextField
 			sx={{ width: 120 }}
 			size="small"
-			margin="none"
-			variant="standard"
+			margin="normal"
+			variant="outlined"
 			aria-readonly
 			InputLabelProps={{ shrink: true }}
 			label={props.label}

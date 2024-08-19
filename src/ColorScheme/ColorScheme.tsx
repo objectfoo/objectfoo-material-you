@@ -1,12 +1,12 @@
 import { ColorOnColor } from "./ColorOnColor";
 import { LabelledColor } from "./LabelledColor";
-import { type PaletteMode } from "@mui/material";
 import { useMemo } from "react";
 import Box from "@mui/material/Box";
 import clsx from "clsx";
-import ColorTools, { type ViewColor } from "../ColorTools";
+import ColorTools, { MaterialFoundationTheme, type ViewColor } from "../ColorTools";
 import CreateViewColor, { SchemeColor } from "./SchemeColorNameMap";
-import type { Scheme, Theme } from "@material/material-color-utilities";
+import type { Scheme } from "@material/material-color-utilities";
+import { SchemeMode } from "../Index/IndexRoot";
 
 
 interface SchemeEntityColorOnColor {
@@ -48,12 +48,13 @@ const CreateColorEntities = (scheme: Scheme): SchemeEntity[] => {
 	];
 };
 
+
 interface ColorSchemeProps {
-	mode: PaletteMode;
-	theme: Theme;
+	mode: SchemeMode;
+	theme: MaterialFoundationTheme;
 }
 
-export default function ColorScheme(props: ColorSchemeProps) {
+export function ColorScheme(props: ColorSchemeProps) {
 	const entities = useMemo(() => CreateColorEntities(props.theme.schemes[props.mode]), [props.theme, props.mode]);
 	const bgColor = ColorTools.HexFromArgb(props.theme.schemes[props.mode].surface);
 	return (

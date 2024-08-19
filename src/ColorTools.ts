@@ -1,6 +1,8 @@
 import { getContrastRatio } from "@mui/system";
-import { Theme as MaterialFoundationTheme, argbFromHex, hexFromArgb, themeFromSourceColor } from "@material/material-color-utilities";
+import { Theme, argbFromHex, hexFromArgb, themeFromSourceColor } from "@material/material-color-utilities";
 import { SchemeColor } from "./ColorScheme/SchemeColorNameMap";
+
+export type MaterialFoundationTheme = Theme;
 
 
 export default class ColorTools {
