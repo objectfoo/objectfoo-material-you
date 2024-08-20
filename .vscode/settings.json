@@ -11,10 +11,13 @@
 		"tailwindcss"
 	],
 	"files.associations": {
-		"*.css": "tailwindcss"
+		"*.css": "css"
 	},
 	"editor.insertSpaces": false,
 	"editor.detectIndentation": false,
 	"editor.tabSize": 2,
-	"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	}
 }

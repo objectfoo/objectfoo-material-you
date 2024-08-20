@@ -1,0 +1,25 @@
+.root {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	background-color: transparent;
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	font-family: inherit;
+	vertical-align: middle;
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1.75;
+	letter-spacing: .0285;
+	min-width: none;
+	color: inherit;
+	outline: initial;
+	text-decoration: none;
+	padding: 5px 15px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: grey;
+	border-image: initial;
+}

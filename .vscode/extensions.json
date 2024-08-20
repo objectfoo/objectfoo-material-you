@@ -1,6 +1,10 @@
 {
 	"recommendations": [
 		"streetsidesoftware.code-spell-checker",
-		"dbaeumer.vscode-eslint"
+		"dbaeumer.vscode-eslint",
+		"dracula-theme.theme-dracula",
+		"evondev.indent-rainbow-palettes",
+		"gruntfuggly.todo-tree",
+		"clinyong.vscode-css-modules"
 	]
 }

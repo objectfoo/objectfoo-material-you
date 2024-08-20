@@ -1,0 +1,43 @@
+.full {
+	border-radius: 100%;
+}
+
+.xlTop {
+	border-radius: 28px 28px 0px 0px;
+}
+
+.xl {
+	border-radius: 28px;
+}
+
+.lgTop {
+	border-radius: 16px 16px 0px 0px;
+}
+
+.lgEnd {
+	border-radius: 0px 16px 16px 0px;
+}
+
+.lgStart {
+	border-radius: 16px 0px 16px 0px;
+}
+
+.lg {
+	border-radius: 16px;
+}
+
+.md {
+	border-radius: 12px
+}
+
+.sm {
+	border-radius: 8px
+}
+
+.xsTop {
+	border-radius: 4px 0px 4px 0px;
+}
+
+.xs {
+	border-radius: 4px;
+}

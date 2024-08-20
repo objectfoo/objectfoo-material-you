@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import type { SxProps, Theme } from "@mui/material";
 import type { SystemStyleObject } from "@mui/system";
+import { FooButton } from "../ExampleComponents/FooButton";
 
 export function ExampleIndex(): JSX.Element {
 	// const { layout } = useParams<{ layout?: string; }>();
@@ -16,17 +17,8 @@ export function ExampleIndex(): JSX.Element {
 
 	return (
 		<Stack mt={3} gap={5} useFlexGap>
-			<Box sx={{
-				flexGrow: 0,
-				display: "inline-block",
-				m: 2,
-				p: 1,
-				borderRadius: "12px 12px 0 0",
-				minHeight: 100,
-				bgcolor: "primary.main",
-				color: "#fff",
-			}}>
-				asdf
+			<Box sx={{ m: 4 }}>
+				<FooButton rounding="md">asdf</FooButton>
 			</Box>
 			<ColorScheme mode={mode} theme={theme} />
 			<TonalPalettes theme={theme} />
