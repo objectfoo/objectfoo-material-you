@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import ColorTools, { ViewColor } from "../ColorTools";
+import { ColorTools, ViewColor } from "../ColorTools";
 import Typography from "@mui/material/Typography";
 
 

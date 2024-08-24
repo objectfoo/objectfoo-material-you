@@ -1,6 +1,6 @@
 import { LabelledColor } from "./LabelledColor";
 import Box from "@mui/material/Box";
-import ColorTools, { type ViewColor } from "../ColorTools";
+import { ColorTools, type ViewColor } from "../ColorTools";
 import type { Theme } from "@mui/material";
 
 

@@ -1,4 +1,4 @@
-import ColorTools from "../ColorTools";
+import { ColorTools } from "../ColorTools";
 
 export type IndexViewData = {
 	hex: string;

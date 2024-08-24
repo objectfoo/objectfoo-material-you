@@ -33,7 +33,7 @@ export enum SchemeColor {
 	"inversePrimary"
 }
 
-export default function CreateViewColor(scheme: Scheme, id: SchemeColor): ViewColor {
+export function CreateViewColor(scheme: Scheme, id: SchemeColor): ViewColor {
 	if (!ColorNameMap.has(id)) {
 		throw new Error(`Unknown color map id ${id}`);
 	}

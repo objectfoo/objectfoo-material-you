@@ -8,7 +8,7 @@ interface TabPanelProps {
 	identifier: string;
 }
 
-export default function TabPanel(props: TabPanelProps) {
+export function TabPanel(props: TabPanelProps) {
 	return (
 		<div
 			role="tabpanel"
